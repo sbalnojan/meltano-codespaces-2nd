@@ -5,6 +5,29 @@ No install needed, just a GitHub account (and a few spare Codespaces minutes you
 
 Let's get started!
 
+
+## What you're building - let's take a sneek peak ##
+
+There's a csv [customers.csv](data/customers.csv) with
+- customer names, e-mail adresses and ips 
+- you're going to extract this CSV and load it into an SQL-database, like, right now!
+
+Go ahead, just run
+
+> `meltano run tap-csv hide-ips target-duckdb`
+
+And boom, you're done. Don't believe us? You can use a helper function to check the SQL-database:
+
+> `./meltano_tut select_db`
+  
+A few fun things you can notice:
+1. There are no ip addresses inside the database, right? Check [customers.csv](data/customers.csv), there were there.
+2. That's because above you added a "mapper" "hide-ips" that is completely customizable and in this case hashes the ips.
+3. Meltano told you at the beginning "no state found, complete import,..." .... Don't believe us? ...
+
+
+# Let's go ahead and build it ourselves within 5 minutes #
+
 ## Step 0 - Open Codespaces
 
 *If you opened this from our homepage, you can go straight to Step 1.*

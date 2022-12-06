@@ -1,1 +1,8 @@
-# empty dummy file
+version: 1
+default_environment: codespace
+project_id: a8bdf4f3-f789-4ffc-9adc-0e0414df9059
+environments:
+- name: dev
+- name: staging
+- name: prod
+- name: codespace
