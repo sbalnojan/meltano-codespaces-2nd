@@ -11,7 +11,7 @@ Let's get started!
 
 Click "Open on Codespaces", to launch this project into a ready to use web VS-Code version with everything preloaded.
 
-![Open Codespaces](codespaceOpen.gif)
+![Open Codespaces](images/codespaceOpen.gif)
 
 **Make sure to open up the README.md inside Codespaces as well.**
 
