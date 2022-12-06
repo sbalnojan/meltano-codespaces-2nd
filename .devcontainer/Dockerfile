@@ -8,4 +8,6 @@ COPY . .
 
 # To query results.
 RUN pip install duckdb
+
+RUN meltano install
 ENV PATH="$PATH:/venv/bin/meltano"
