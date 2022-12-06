@@ -6,7 +6,23 @@ No install needed, just a GitHub account (and a few spare Codespaces minutes you
 Let's get started!
 
 
-## What you're building - let's take a sneek peak ##
+## Step 0 - Open Codespaces
+
+*If you opened this from our homepage, you can go straight to Step 1.*
+
+Click "Open on Codespaces", to launch this project into a ready to use web VS-Code version with everything preloaded.
+
+![Open Codespaces](images/codespaceOpen.gif)
+
+**Make sure to open up the README.md inside Codespaces as well.**
+
+*Notes on codespaces:* 
+- If you at any point get an error "The user denied permission to use Service Worker", then you need to enable third-party cookies. [It's a codespaces related problem](https://github.com/orgs/community/discussions/26316).
+- In our experience, codespaces work best in Chrome or Firefox, not so well in Safari.
+- Files in codespaces autosave! No need to save anything.
+
+
+## Step 1 - What you're building - let's take a sneek peak ##
 
 There's a csv [customers.csv](data/customers.csv) with
 - customer names, e-mail adresses and ips 
@@ -23,27 +39,14 @@ And boom, you're done. Don't believe us? You can use a helper function to check 
 A few fun things you can notice:
 1. There are no ip addresses inside the database, right? Check [customers.csv](data/customers.csv), there were there.
 2. That's because above you added a "mapper" "hide-ips" that is completely customizable and in this case hashes the ips.
-3. Meltano told you at the beginning "no state found, complete import,..." .... Don't believe us? ...
+3. In the console output - Meltano told you at the beginning of the log ... "Schema 'raw' does not exist." 
+4. That is because Meltano has a lot of helper functions. It e.g. creates schemas and tables, should they not already exist. 
 
+Feel free to explore the project, or dive right into building it yourself!
 
 # Let's go ahead and build it ourselves within 5 minutes #
 
-## Step 0 - Open Codespaces
-
-*If you opened this from our homepage, you can go straight to Step 1.*
-
-Click "Open on Codespaces", to launch this project into a ready to use web VS-Code version with everything preloaded.
-
-![Open Codespaces](images/codespaceOpen.gif)
-
-**Make sure to open up the README.md inside Codespaces as well.**
-
-*Notes on codespaces:* 
-- If you at any point get an error "The user denied permission to use Service Worker", then you need to enable third-party cookies. [It's a codespaces related problem](https://github.com/orgs/community/discussions/26316).
-- In our experience, codespaces work best in Chrome or Firefox, not so well in Safari.
-- Files in codespaces autosave! No need to save anything.
-
-## Step 1 - Initialize Meltano Project
+## Step 2 - Initialize Meltano Project
 
 Inside the terminal (bottom window) run: 
 
@@ -55,13 +58,13 @@ You can take a look around:
 - there is a file "data/customers.csv", it is the one you will be loading into a datawarehouse.
 - there are now a bunch of Meltano project files, including the important "meltano.yml"
 
-## Step 2  - Add your first extractor
+## Step 3  - Add your first extractor
 
 Add your first extractor to get data from the CSV. Do so by running inside the terminal:
 
 > `meltano add extractor tap-csv`
 
-Then open up the file `meltano.yml`, copy the config below, and paste it below `pip_url`.
+Then open up the file `meltano.yml`, copy the config below, and paste it below `pip_url` (that should be line 14).
 
 ```yaml
     config:
@@ -86,7 +89,7 @@ plugins:
         keys: [id]
 ```
 
-## Step 3 - Test run your tap
+## Step 4 - Test run your tap
 
 Let's test the tap by running:
 
@@ -94,13 +97,13 @@ Let's test the tap by running:
 
 If everything works as expected, Meltano should extract the CSV and dump it as a "stream" onto standard output inside the terminal.
 
-## Step 4 - Add a loader
+## Step 5 - Add a loader
 
 Next add a loader to load our data into a local duckdb:
 
 > `meltano add loader target-duckdb`
 
-Copy the configuration below and paste it below the `pip_url` for target-duckdb in the `meltano.yml` file.
+Copy the configuration below and paste it below the `pip_url` (into line 23) for target-duckdb in the `meltano.yml` file.
 
 ```yaml
     config:
@@ -120,7 +123,7 @@ The config in `meltano.yml` for target-duckdb should look like this:
       default_target_schema: raw
 ```
 
-## Step 5 - Run your EL pipeline
+## Step 6 - Run your EL pipeline
 
 Now you can do your first complete EL run by calling `meltano run`! 
 
@@ -128,7 +131,7 @@ Now you can do your first complete EL run by calling `meltano run`!
 
 Perfect!
 
-## Step 6 - View loaded data
+## Step 7 - View loaded data
 
 To view your data you can use our little helper:
 
@@ -138,7 +141,7 @@ This will run a `SELECT * FROM public.raw_customers` on your duckdb instance and
 
 Great! You've completed your first extract and load run. 🥳
 
-## Step 7 - Remove plain text IP adresses
+## Step 8 - Remove plain text IP adresses
 
 Notice that the data you just viewed had plain IP adresses inside of it? Let's quickly get rid of those!
 
@@ -146,7 +149,7 @@ Add a "mapper" to do slight modifications on the data we're sourcing here.
 
 > `meltano add mapper transform-field`
 
- Then paste the following config below the `pip_url` for the `transform-field` mapper in your `meltano.yml` file.
+ Then paste the following config below the `pip_url` (into line 30) for the `transform-field` mapper in your `meltano.yml` file.
 
 ```yaml
     mappings:
@@ -183,7 +186,7 @@ To view the data again, run the helper again:
 
 > `./meltano_tut select_db`
 
-## Step 8 - Celebrate your success 🎉
+## Step 9 - Celebrate your success 🎉
 
 That was fun and quick! Now try to run 
 
