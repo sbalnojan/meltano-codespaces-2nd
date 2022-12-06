@@ -10,8 +10,8 @@ RUN pip install duckdb
 
 ENV PATH="$PATH:/venv/bin/meltano"
 
-RUN cd ../home/ && ls
-RUN ls
-RUN meltano install loaders
+#RUN meltano install loaders
 RUN meltano install extractors
-RUN meltano install mappers
+RUN ls
+RUN ls .meltano/extractors/tap-csv/venv/
+#RUN meltano install mappers
