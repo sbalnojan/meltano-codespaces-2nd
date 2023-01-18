@@ -10,6 +10,5 @@
             "**/CODE_OF_CONDUCT.md": true,
             "**/LICENSE": true
         }
-    },
-    "postStartCommand": "ln -s /home/.meltano /workspaces/meltano-codespaces-2nd/.meltano",
+    }
 }
