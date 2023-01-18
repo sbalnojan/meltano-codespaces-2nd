@@ -11,5 +11,5 @@
             "**/LICENSE": true
         }
     },
-    "postCreateCommand": "ln -s /home/.meltano /workspaces/meltano-codespaces-2nd/.meltano",
+    "postStartCommand": "ln -s /home/.meltano /workspaces/meltano-codespaces-2nd/.meltano",
 }
